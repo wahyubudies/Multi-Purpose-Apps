@@ -10,4 +10,8 @@ class ListUsers extends Component
     {
         return view('livewire.admin.users.list-users');
     }
+    public function addNewUser()
+    {
+        $this->dispatchBrowserEvent('show-form');
+    }
 }
