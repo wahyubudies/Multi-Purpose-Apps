@@ -62,30 +62,30 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <small for="name">Name</small>
-              <input type="text" class="form-control form-control-sm mt-1" id="name" placeholder="Name.">
-            </div>
-            <div class="form-group">
-              <small for="email">Email</small>
-              <input type="text" class="form-control form-control-sm mt-1" id="email" placeholder="Email.">
-            </div>
-            <div class="form-group">
-              <small for="password">Password</small>
-              <input type="password" class="form-control form-control-sm mt-1" id="password" placeholder="Password.">
-            </div>
-            <div class="form-group">
-              <small for="confirm-password">Confirm Password</small>
-              <input type="password" class="form-control form-control-sm mt-1" id="confirm-password" placeholder="Confirm Password.">
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">cancel</button>
-          <button type="button" class="btn btn-sm btn-primary">save</button>
-        </div>
+        <form wire:submit.prevent="createUser">
+          <div class="modal-body">
+              <div class="form-group">
+                <small for="name">Name</small>
+                <input type="text" wire:model.defer="state.name" class="form-control form-control-sm mt-1" id="name" placeholder="Name.">
+              </div>
+              <div class="form-group">
+                <small for="email">Email</small>
+                <input type="text" wire:model.defer="state.email" class="form-control form-control-sm mt-1" id="email" placeholder="Email.">
+              </div>
+              <div class="form-group">
+                <small for="password">Password</small>
+                <input type="password" wire:model.defer="state.password" class="form-control form-control-sm mt-1" id="password" placeholder="Password.">
+              </div>
+              <div class="form-group">
+                <small for="confirm-password">Confirm Password</small>
+                <input type="password" wire:model.defer="state.password_confirmation" class="form-control form-control-sm mt-1" id="confirm-password" placeholder="Confirm Password.">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">cancel</button>
+            <button type="submit" class="btn btn-sm btn-primary">save</button>
+          </div>
+      </form>
       </div>
     </div>
   </div>
