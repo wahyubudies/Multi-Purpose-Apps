@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Admin\Users;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 
 class ListUsers extends Component
@@ -10,7 +12,8 @@ class ListUsers extends Component
     
     public function render()
     {
-        return view('livewire.admin.users.list-users');
+        $users = User::latest()->paginate();
+        return view('livewire.admin.users.list-users', ['users' => $users]);
     }
     public function addNewUser()
     {
@@ -18,6 +21,15 @@ class ListUsers extends Component
     }
     public function createUser()
     {
-        dd($this->state);
+        $validated = Validator::make($this->state, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed'
+        ])->validate();
+
+        $validated['password'] = bcrypt($validated['password']);
+        User::create($validated);
+        
+        $this->dispatchBrowserEvent('hide-form');
     }
 }

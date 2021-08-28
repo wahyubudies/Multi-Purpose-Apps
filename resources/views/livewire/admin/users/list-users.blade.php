@@ -35,15 +35,21 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @forelse($users as $user)
                   <tr>
-                    <td>1.</td>
-                    <td>Update software</td>
-                    <td>wahyubudies1@gmail.com</td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
                     <td class="d-flex align-items-center">
                       <a href="#" class="badge bg-warning mr-2"><i class="fas fa-edit"></i></a>
                       <a href="#" class="badge bg-danger"><i class="fas fa-trash-alt"></i></a>
                     </td>
                   </tr>
+                  @empty
+                  <tr>
+                    <td colspan="4"> No records.</td>
+                  </tr>
+                  @endforelse
                 </tbody>
               </table>
             </div>
@@ -53,7 +59,7 @@
     </div>
   </div>
 
-  <div class="modal fade" id="form" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade" id="form" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" wire:ignore.self>
     <div class="modal-dialog">
       <div class="modal-content shadow-none">
         <div class="modal-header">
@@ -66,15 +72,30 @@
           <div class="modal-body">
               <div class="form-group">
                 <small for="name">Name</small>
-                <input type="text" wire:model.defer="state.name" class="form-control form-control-sm mt-1" id="name" placeholder="Name.">
+                <input type="text" wire:model.defer="state.name" class="form-control form-control-sm mt-1 @error('name') is-invalid @enderror" id="name" placeholder="Name.">
+                @error('name')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
               </div>
               <div class="form-group">
                 <small for="email">Email</small>
-                <input type="text" wire:model.defer="state.email" class="form-control form-control-sm mt-1" id="email" placeholder="Email.">
+                <input type="text" wire:model.defer="state.email" class="form-control form-control-sm mt-1 @error('email') is-invalid @enderror" id="email" placeholder="Email.">
+                @error('email')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
               </div>
               <div class="form-group">
                 <small for="password">Password</small>
-                <input type="password" wire:model.defer="state.password" class="form-control form-control-sm mt-1" id="password" placeholder="Password.">
+                <input type="password" wire:model.defer="state.password" class="form-control form-control-sm mt-1 @error('password') is-invalid @enderror" id="password" placeholder="Password.">
+                @error('password')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
               </div>
               <div class="form-group">
                 <small for="confirm-password">Confirm Password</small>

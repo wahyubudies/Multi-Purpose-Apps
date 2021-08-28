@@ -50,7 +50,10 @@
 <script>
   document.addEventListener('show-form', event => {
     $('#form').modal('show');
-  })
+  });
+  document.addEventListener('hide-form', event => {
+    $('#form').modal('hide');
+  });
 </script>
 <livewire:scripts />
 </body>
