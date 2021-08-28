@@ -8,52 +8,63 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <link rel="stylesheet" href="{{ asset('backend/plugins/fontawesome-free/css/all.min.css') }}">
   <link rel="stylesheet" href="{{ asset('backend/dist/css/adminlte.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('backend/plugins/toastr/toastr.min.css') }}">
   <livewire:styles />
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
-  <!-- Sidebar -->
   @include('layouts.partials.navbar')
 
-  <!-- Main Sidebar Container -->
   @include('layouts.partials.sidebar')
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     {{ $slot }}
   </div>
 
-  <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
     <div class="p-3">
       <h5>Title</h5>
       <p>Sidebar content</p>
     </div>
   </aside>
-  <!-- /.control-sidebar -->
 
-  <!-- Main Footer -->
   @include('layouts.partials.footer')
 </div>
-<!-- ./wrapper -->
 
-<!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
 <script src="{{ asset('backend/plugins/jquery/jquery.min.js') }}"></script>
-<!-- Bootstrap 4 -->
 <script src="{{ asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<!-- AdminLTE App -->
 <script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
+<script>
+  $(document).ready(function(){
+    toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": true,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    };
+    document.addEventListener('hide-form', event => {
+      $('#form').modal('hide');
+      toastr.success(event.detail.message, 'Success!');
+    });
+  });
+</script>
 <script>
   document.addEventListener('show-form', event => {
     $('#form').modal('show');
-  });
-  document.addEventListener('hide-form', event => {
-    $('#form').modal('hide');
-  });
+  }); 
 </script>
 <livewire:scripts />
 </body>
