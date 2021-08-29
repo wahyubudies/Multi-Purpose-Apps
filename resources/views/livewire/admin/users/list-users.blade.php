@@ -42,7 +42,7 @@
                     <td>{{ $user->email }}</td>
                     <td class="d-flex align-items-center">
                       <a href="#" wire:click.prevent="editUser({{ $user }})" class="badge bg-warning mr-2"><i class="fas fa-edit"></i></a>
-                      <a href="#" class="badge bg-danger"><i class="fas fa-trash-alt"></i></a>
+                      <a href="#" wire:click.prevent="confirmUserRemoval({{ $user->id }})" class="badge bg-danger"><i class="fas fa-trash-alt"></i></a>
                     </td>
                   </tr>
                   @empty
@@ -59,6 +59,7 @@
     </div>
   </div>
 
+  {{-- Modal Form --}}
   <div class="modal fade" id="form" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" wire:ignore.self>
     <div class="modal-dialog">
       <div class="modal-content shadow-none">
@@ -110,7 +111,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal"><i class="fas fa-window-close mr-1"></i> cancel</button>
-            <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-save mr-1"></i> 
+            <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-save mr-1"></i>
               @if($editModal)
                 save changes
               @else
@@ -123,4 +124,24 @@
     </div>
   </div>
 
+  {{-- Modal Confirmation --}}
+  <div class="modal fade" id="confirmationModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content shadow-none">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Do you want to delete data user ?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal"><i class="fas fa-window-close mr-1"></i> cancel</button>
+          <button type="button" wire:click.prevent="deleteUser" class="btn btn-sm btn-danger"><i class="fas fa-save mr-1"></i> Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

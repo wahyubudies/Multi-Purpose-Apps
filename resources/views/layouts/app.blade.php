@@ -37,7 +37,7 @@
 <script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
 <script>
-  $(document).ready(function(){
+  $(function(){
     toastr.options = {
       "closeButton": true,
       "debug": false,
@@ -54,17 +54,24 @@
       "hideEasing": "linear",
       "showMethod": "fadeIn",
       "hideMethod": "fadeOut"
-    };
-    document.addEventListener('hide-form', event => {
-      $('#form').modal('hide');
-      toastr.success(event.detail.message, 'Success!');
-    });
+    };    
   });
 </script>
 <script>
   document.addEventListener('show-form', event => {
     $('#form').modal('show');
+  });
+  document.addEventListener('hide-form', event => {
+    $('#form').modal('hide');
+    toastr.success(event.detail.message, 'Success!');
   }); 
+  document.addEventListener('show-delete-modal', event => {
+    $('#confirmationModal').modal('show');
+  });
+  document.addEventListener('hide-delete-modal', event => {
+    $('#confirmationModal').modal('hide');
+    toastr.success(event.detail.message, 'Success!');
+  });
 </script>
 <livewire:scripts />
 </body>
