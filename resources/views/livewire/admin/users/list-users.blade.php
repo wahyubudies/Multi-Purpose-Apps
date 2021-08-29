@@ -22,7 +22,7 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-header">
-              <button wire:click.prevent="addNewUser" class="badge bg-primary border-0">add new user</button>
+              <button wire:click.prevent="addNewUser" class="badge bg-primary border-0"><i class="fas fa-plus-circle mr-1"></i> add new user</button>
             </div>
             <div class="card-body p-0">
               <table class="table table-sm">
@@ -41,7 +41,7 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td class="d-flex align-items-center">
-                      <a href="#" class="badge bg-warning mr-2"><i class="fas fa-edit"></i></a>
+                      <a href="#" wire:click.prevent="editUser({{ $user }})" class="badge bg-warning mr-2"><i class="fas fa-edit"></i></a>
                       <a href="#" class="badge bg-danger"><i class="fas fa-trash-alt"></i></a>
                     </td>
                   </tr>
@@ -63,12 +63,18 @@
     <div class="modal-dialog">
       <div class="modal-content shadow-none">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Add new user</h5>
+          <h5 class="modal-title" id="staticBackdropLabel">
+            @if($editModal)
+              Edit new user
+            @else
+              Add new user
+            @endif
+          </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form wire:submit.prevent="createUser">
+        <form wire:submit.prevent="{{ $editModal ? 'updateUser' : 'createUser'}}">
           <div class="modal-body">
               <div class="form-group">
                 <small for="name">Name</small>
@@ -103,8 +109,14 @@
               </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">cancel</button>
-            <button type="submit" class="btn btn-sm btn-primary">save</button>
+            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal"><i class="fas fa-window-close mr-1"></i> cancel</button>
+            <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-save mr-1"></i> 
+              @if($editModal)
+                save changes
+              @else
+                save
+              @endif
+            </button>
           </div>
       </form>
       </div>

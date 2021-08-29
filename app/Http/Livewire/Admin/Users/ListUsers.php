@@ -9,6 +9,8 @@ use Livewire\Component;
 class ListUsers extends Component
 {
     public $state = [];
+    public $user;
+    public $editModal = false;
     
     public function render()
     {
@@ -17,6 +19,7 @@ class ListUsers extends Component
     }
     public function addNewUser()
     {
+        $this->editModal = false;
         $this->dispatchBrowserEvent('show-form');
     }
     public function createUser()
@@ -31,5 +34,25 @@ class ListUsers extends Component
         User::create($validated);
         
         $this->dispatchBrowserEvent('hide-form', ['message' => 'Data added successfully!']);
+    }
+    public function editUser(User $user)
+    {        
+        $this->editModal = true;
+        $this->state = $user->toArray();
+        $this->user = $user;
+        $this->dispatchBrowserEvent('show-form');
+    }
+    public function updateUser()
+    {
+        $validated = Validator::make($this->state, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $this->user->id,
+            'password' => 'sometimes|confirmed'
+        ])->validate();
+        
+        if(!empty($validated['password'])) $validated['password'] = bcrypt($validated['password']);
+        $this->user->update($validated);
+
+        $this->dispatchBrowserEvent('hide-form', ['message' => 'Data updated successfully!']);
     }
 }
