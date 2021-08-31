@@ -5,17 +5,20 @@ namespace App\Http\Livewire\Admin\Users;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ListUsers extends Component
 {
-    public $state = [];
+    use WithPagination;
+    public $paginationTheme = 'bootstrap';
+    public $state = [];    
     public $user;
     public $editModal = false;
     public $userBeingRemoved = null;
     
     public function render()
     {
-        $users = User::latest()->paginate();
+        $users = User::latest()->paginate(5);
         return view('livewire.admin.users.list-users', ['users' => $users]);
     }
     public function addNewUser()
