@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="{{ asset('backend/plugins/fontawesome-free/css/all.min.css') }}">
   <link rel="stylesheet" href="{{ asset('backend/dist/css/adminlte.min.css') }}">
   <link rel="stylesheet" href="{{ asset('backend/plugins/toastr/toastr.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
   <livewire:styles />
 </head>
 <body class="hold-transition sidebar-mini">
@@ -36,8 +37,14 @@
 <script src="{{ asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('backend/plugins/moment/moment.min.js') }}"></script>
+<script src="{{ asset('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <script>
   $(function(){
+    $('#datetimepicker1').datetimepicker();
+    $('#datetimepicker4').datetimepicker({
+        format: 'L'
+    });
     toastr.options = {
       "closeButton": true,
       "debug": false,
