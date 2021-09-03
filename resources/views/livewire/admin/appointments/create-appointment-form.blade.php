@@ -19,7 +19,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card">)
+                    <div class="card">
                         <form wire:submit.prevent="createAppointment">
                             <div class="card-body">
                                     <div class="row">
@@ -50,9 +50,9 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <small for="">Date</small>
-                                                <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                                    <input wire:model.defer="state.date" type="text" class="form-control form-control-sm datetimepicker-input" data-target="#datetimepicker4"/>
-                                                    <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                                                <div class="input-group date" wire:ignore id="appointmentDate" data-target-input="nearest" data-appointmentdate="@this">
+                                                    <input id="appointDateInput" type="text" class="form-control form-control-sm datetimepicker-input" data-target="#appointmentDate"/>
+                                                    <div class="input-group-append" data-target="#appointmentDate" data-toggle="datetimepicker">
                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                     </div>
                                                 </div>

@@ -42,8 +42,12 @@
 <script>
   $(function(){
     $('#datetimepicker1').datetimepicker();
-    $('#datetimepicker4').datetimepicker({
+    $('#appointmentDate').datetimepicker({
         format: 'L'
+    });
+    $('#appointmentDate').on('change.datetimepicker', function(e){
+        let date = $(this).data('appointmentdate');
+        eval(date).set('state.date', $('#appointDateInput').val());
     });
     toastr.options = {
       "closeButton": true,
