@@ -39,38 +39,9 @@
 <script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/moment/moment.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-<script>
-  document.addEventListener('show-form', event => {
-    $('#form').modal('show');
-  });
-  document.addEventListener('hide-form', event => {
-    $('#form').modal('hide');
-    toastr.success(event.detail.message, 'Success!');
-  }); 
-  document.addEventListener('show-delete-modal', event => {
-    $('#confirmationModal').modal('show');
-  });
-  document.addEventListener('hide-delete-modal', event => {
-    $('#confirmationModal').modal('hide');
-    toastr.success(event.detail.message, 'Success!');
-  });
-</script>
+<script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
 <script>
   $(function(){
-    $('#appointmentDate').datetimepicker({
-        format: 'L'
-    });
-    $('#appointmentTime').datetimepicker({
-        format: 'LT'
-    });
-    $('#appointmentDate').on('change.datetimepicker', function(e){
-        let date = $(this).data('appointmentdate');
-        eval(date).set('state.date', $('#appointDateInput').val());
-    });
-    $('#appointmentTime').on('change.datetimepicker', function(e){
-        let time = $(this).data('appointmenttime');
-        eval(time).set('state.time', $('#appointTimeInput').val());
-    });
     toastr.options = {
       "closeButton": true,
       "debug": false,
@@ -87,12 +58,24 @@
       "hideEasing": "linear",
       "showMethod": "fadeIn",
       "hideMethod": "fadeOut"
-    };    
-  });
-</script>
-<script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
-<script>
-  ClassicEditor
+    };   
+
+    $('#appointmentDate').datetimepicker({
+        format: 'L'
+    });
+    $('#appointmentTime').datetimepicker({
+        format: 'LT'
+    });
+    $('#appointmentDate').on('change.datetimepicker', function(e){
+        let date = $(this).data('appointmentdate');
+        eval(date).set('state.date', $('#appointDateInput').val());
+    });
+    $('#appointmentTime').on('change.datetimepicker', function(e){
+        let time = $(this).data('appointmenttime');
+        eval(time).set('state.time', $('#appointTimeInput').val());
+    });
+    
+    ClassicEditor
       .create( document.querySelector( '#note' ) )
       .then( editor => {
         document.querySelector('#submit').addEventListener('click', ()=> {
@@ -103,6 +86,23 @@
       .catch( error => {
         console.error( error );
       });
+  });
+</script>
+<script>
+  document.addEventListener('show-form', event => {
+    $('#form').modal('show');
+  });
+  document.addEventListener('hide-form', event => {
+    $('#form').modal('hide');
+    toastr.success(event.detail.message, 'Success!');
+  }); 
+  document.addEventListener('show-delete-modal', event => {
+    $('#confirmationModal').modal('show');
+  });
+  document.addEventListener('hide-delete-modal', event => {
+    $('#confirmationModal').modal('hide');
+    toastr.success(event.detail.message, 'Success!');
+  });
 </script>
 <livewire:scripts />
 </body>
