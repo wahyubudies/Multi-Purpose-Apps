@@ -19,8 +19,7 @@ class CreateAppointmentForm extends Component
     }
     public function createAppointment()
     {
-        //validate      
-        $this->state['time'] = '00:00:00';
+        //validate
         $this->state['status'] = 'open';
         Appointment::create($this->state);
         $this->dispatchBrowserEvent('alert', ['message' => 'Data addedd successfully!']);

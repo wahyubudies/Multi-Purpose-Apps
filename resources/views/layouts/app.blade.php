@@ -45,9 +45,16 @@
     $('#appointmentDate').datetimepicker({
         format: 'L'
     });
+    $('#appointmentTime').datetimepicker({
+        format: 'LT'
+    });
     $('#appointmentDate').on('change.datetimepicker', function(e){
         let date = $(this).data('appointmentdate');
         eval(date).set('state.date', $('#appointDateInput').val());
+    });
+    $('#appointmentTime').on('change.datetimepicker', function(e){
+        let time = $(this).data('appointmenttime');
+        eval(time).set('state.time', $('#appointTimeInput').val());
     });
     toastr.options = {
       "closeButton": true,

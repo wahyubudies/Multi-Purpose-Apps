@@ -39,10 +39,10 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <small for="">Date Appointments</small>
-                                                <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                                                    <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#datetimepicker1"/>
-                                                    <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                <div class="input-group date" id="appointmentTime" data-target-input="nearest" data-appointmenttime="@this" wire:ignore>
+                                                    <input type="text" id="appointTimeInput" class="form-control form-control-sm datetimepicker-input" data-target="#appointmentTime"/>
+                                                    <div class="input-group-append" data-target="#appointmentTime" data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-clock"></i></div>
                                                     </div>
                                                 </div>
                                             </div>
