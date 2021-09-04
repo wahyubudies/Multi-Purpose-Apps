@@ -59,16 +59,16 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
-                                            <div class="form-group">
+                                            <div class="form-group" wire:ignore>
                                                 <small for="">Note</small>
-                                                <textarea wire:model.defer="state.note" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                                <textarea id="note" wire:model.defer="state.note" data-note="@this" class="form-control"></textarea>
                                             </div>
                                         </div>
                                     </div>
                             </div>
                             <div class="card-footer">
                                 <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal"><i class="fas fa-window-close mr-1"></i> reset</button>
-                                <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-save mr-1"></i> submit</button>
+                                <button id="submit" type="submit" class="btn btn-sm btn-success"><i class="fas fa-save mr-1"></i> submit</button>
                             </div>
                         </form>
                     </div>
