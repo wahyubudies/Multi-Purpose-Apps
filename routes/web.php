@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Livewire\Admin\Appointmenst\ListAppointments;
 use App\Http\Livewire\Admin\Appointments\CreateAppointmentForm;
+use App\Http\Livewire\Admin\Appointments\ListAppointments;
 use App\Http\Livewire\Admin\Users\ListUsers;
 use Illuminate\Support\Facades\Route;
 

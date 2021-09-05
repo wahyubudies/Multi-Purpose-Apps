@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        <form wire:submit.prevent="createAppointment">
+                        <form wire:submit.prevent="createAppointment" autocomplete="off">
                             <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-6">
@@ -38,22 +38,22 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <small for="">Date Appointments</small>
-                                                <div class="input-group date" id="appointmentTime" data-target-input="nearest" data-appointmenttime="@this" wire:ignore>
-                                                    <input type="text" id="appointTimeInput" class="form-control form-control-sm datetimepicker-input" data-target="#appointmentTime"/>
-                                                    <div class="input-group-append" data-target="#appointmentTime" data-toggle="datetimepicker">
-                                                        <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                                                <small class="">Appointment Date</small>
+                                                <div class="input-group">
+                                                    <x-datepicker id="appointmentDate" wire:model.defer="state.date"/>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <small for="">Date</small>
-                                                <div class="input-group date" wire:ignore id="appointmentDate" data-target-input="nearest" data-appointmentdate="@this">
-                                                    <input id="appointDateInput" type="text" class="form-control form-control-sm datetimepicker-input" data-target="#appointmentDate"/>
-                                                    <div class="input-group-append" data-target="#appointmentDate" data-toggle="datetimepicker">
-                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                <small class="">Appointment Start Time</small>
+                                                <div class="input-group">
+                                                    <x-timepicker id="appointmentTime" wire:model.defer="state.time"/>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fa fa-clock"></i></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -77,3 +77,40 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
+<script>
+    $(function(){
+        toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+        };   
+                
+        ClassicEditor
+        .create( document.querySelector( '#note' ) )
+        .then( editor => {
+            document.querySelector('#submit').addEventListener('click', ()=> {
+            let note = $('#note').data('note');
+            eval(note).set('state.note', editor.getData());
+            });
+        })
+        .catch( error => {
+            console.error( error );
+        });
+    });
+</script>
+@endpush
