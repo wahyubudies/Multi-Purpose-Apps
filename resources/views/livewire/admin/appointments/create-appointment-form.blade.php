@@ -26,7 +26,7 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <small for="">Client</small>
-                                                <select wire:model.defer="state.client_id" class="custom-select custom-select-sm rounded-0" id="exampleSelectRounded0">
+                                                <select wire:model.defer="state.client_id" class="@error('client_id') is-invalid @enderror custom-select custom-select-sm rounded-0" id="exampleSelectRounded0">
                                                     <option value="">Select Client</option>
                                                     @forelse ($clients as $client)
                                                         <option value="{{ $client->id }}">{{ $client->name }}</option>
@@ -34,16 +34,26 @@
                                                         <option>empty.</option>
                                                     @endforelse                                                    
                                                 </select>
+                                                @error('client_id')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <small class="">Appointment Date</small>
                                                 <div class="input-group">
-                                                    <x-datepicker id="appointmentDate" wire:model.defer="state.date"/>
+                                                    <x-datepicker id="appointmentDate" wire:model.defer="state.date" :error="'date'"/>
                                                     <div class="input-group-append">
                                                         <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                     </div>
+                                                    @error('date')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -51,10 +61,32 @@
                                             <div class="form-group">
                                                 <small class="">Appointment Start Time</small>
                                                 <div class="input-group">
-                                                    <x-timepicker id="appointmentTime" wire:model.defer="state.time"/>
+                                                    <x-timepicker id="appointmentTime" wire:model.defer="state.time" :error="'time'"/>
                                                     <div class="input-group-append">
                                                         <span class="input-group-text"><i class="fa fa-clock"></i></span>
                                                     </div>
+                                                    @error('time')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <small class="">Status</small>
+                                                <div class="input-group">
+                                                    <select wire:model.defer="state.status" class="@error('status') is-invalid @enderror custom-select custom-select-sm rounded-0" id="">
+                                                        <option value="">Select Status</option>
+                                                        <option value="SCHEDULED">Scheduled</option>
+                                                        <option value="CLOSED">Closed</option>
+                                                    </select>
+                                                    @error('status')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
