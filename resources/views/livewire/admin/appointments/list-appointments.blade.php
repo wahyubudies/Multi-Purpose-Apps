@@ -38,21 +38,29 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {{-- @forelse($users as $user) --}}
-                    <tr>
-                        <td>{{-- $users->firstItem() + $loop->index --}}</td>
-                        <td>{{-- $user->name --}}</td>
-                        <td>{{-- $user->email --}}</td>
-                        <td class="d-flex align-items-center">
-                            <a href="#" wire:click.prevent="editUser({{-- $user --}})" class="badge bg-warning mr-2"><i class="fas fa-edit"></i></a>
-                            <a href="#" wire:click.prevent="confirmUserRemoval({{-- $user->id --}})" class="badge bg-danger"><i class="fas fa-trash-alt"></i></a>
-                        </td>
-                    </tr>
-                    {{-- @empty --}}
+                    @forelse($appointments as $appointment)
+                        <tr>
+                            <td>{{ $appointments->firstItem() + $loop->index }}</td>
+                            <td>{{ $appointment->client->name }}</td>
+                            <td>{{ $appointment->date->format('d/m/Y') }}</td>
+                            <td>{{ $appointment->time->format('h:m A')}}</td>
+                            <td>
+                                @if($appointment->status === 'SCHEDULED')
+                                    <span class="badge badge-secondary">Scheduled</span>
+                                @elseif($appointment->status === 'CLOSED')
+                                    <span class="badge badge-success">Closed</span>
+                                @endif
+                            </td>
+                            <td class="d-flex align-items-center">
+                                <a href="#" wire:click.prevent="editUser({{-- $user --}})" class="badge bg-warning mr-2"><i class="fas fa-edit"></i></a>
+                                <a href="#" wire:click.prevent="confirmUserRemoval({{-- $user->id --}})" class="badge bg-danger"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    @empty
                     <tr>
                         <td colspan="4"> No records.</td>
                     </tr>
-                    {{-- @endforelse --}}
+                    @endforelse
                     </tbody>
                 </table>
                 </div>
